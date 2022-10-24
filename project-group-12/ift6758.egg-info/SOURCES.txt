@@ -1,0 +1,17 @@
+README.md
+setup.py
+ift6758/__init__.py
+ift6758.egg-info/PKG-INFO
+ift6758.egg-info/SOURCES.txt
+ift6758.egg-info/dependency_links.txt
+ift6758.egg-info/top_level.txt
+ift6758.egg-info/.ipynb_checkpoints/PKG-INFO-checkpoint
+ift6758.egg-info/.ipynb_checkpoints/SOURCES-checkpoint.txt
+ift6758.egg-info/.ipynb_checkpoints/dependency_links-checkpoint.txt
+ift6758.egg-info/.ipynb_checkpoints/top_level-checkpoint.txt
+ift6758/data/__init__.py
+ift6758/data/data_Acquisition.py
+ift6758/data/question_1.py
+ift6758/data/test.py
+ift6758/features/__init__.py
+ift6758/visualizations/__init__.py
