@@ -12,10 +12,7 @@ def AddEmptyNetFeature (df)  -> pd.DataFrame:
     return df
 
 def rinkSideMissingValues2 (df) -> pd.DataFrame: 
-    """Return a dataframe with no null values of rinkSide variable. 
- 
-    :param path: path of the dataframe
-    :type path: String
+    """Return a dataframe with no null values of rinkSide variable.
     
     :rtype: DataFrame
     :return: return a dataframe  
@@ -54,12 +51,6 @@ def addAngleFromNet (df) -> pd.DataFrame:
 
 def combineAllFeatures (df) -> pd.DataFrame: 
     """Return a dataframe with Distance and angle of the shot from the net
- 
-    :param path: path of the dataframe
-    :type path: String
-    
-    :rtype: DataFrame
-    :return: return a dataframe  
     """
     df1 = AddIsGoalFeature (df)
     df2 = AddEmptyNetFeature (df1)  
