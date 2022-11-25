@@ -81,4 +81,5 @@ def goalRatioPerAngle (df,bins) :
     table['goalRatio'] = round(table[1]*100/ table['total'],2)
     df_final = table [['goalRatio', 'Anlge_binned']].reset_index(drop =True).dropna()
     df_final['Anlge_binned'] =df_final['Anlge_binned'].astype('str')
+    
     return df_final

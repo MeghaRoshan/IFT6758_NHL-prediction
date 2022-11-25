@@ -4,7 +4,7 @@ import pickle
 import os
 
 #we used this link for game id extraction : https://gitlab.com/dword4/nhlapi/-/blob/master/stats-api.md#game-ids
-def gameIdListExtraction(year) : 
+def gameIdListExtraction(year,playoffs) : 
     """Return a list of all gameID for regular and playoffs seasons from 2016 to 2021 ,
     that we will use in the next function to extract data of each gameID.
  
@@ -14,7 +14,10 @@ def gameIdListExtraction(year) :
     :rtype: list
     :return: list of gameIds 
     """
-    season_type = ['02', '03' ]  # 02 is the indicator for regular season and 03 for playoffs season
+    if playoffs ==False : 
+        season_type = ['02']  # 02 is the indicator for regular season and 03 for playoffs season
+    else : 
+        season_type = ['02', '03' ] 
     gameIdList = [] # list of all game id from  2016 to 2021
     for season in season_type :
         if season =='02' :
@@ -36,9 +39,9 @@ def gameIdListExtraction(year) :
 
 # we used this website as reference to dowload the data :
 #https://www.kaggle.com/code/kapastor/nhl-analytics-data-collection
-def dataDownload(year) : 
+def dataDownload(year,playoffs) : 
     game_data = []
-    gameIdList = gameIdListExtraction(year)
+    gameIdList = gameIdListExtraction(year,playoffs)
     if  os.path.exists('./'+str(year)+'FullDataset.pkl') :
         print('file already exsiste') 
     else : 
@@ -50,3 +53,6 @@ def dataDownload(year) :
         with open('./'+str(year)+'FullDataset.pkl', 'wb') as f:
             pickle.dump(game_data, f, pickle.HIGHEST_PROTOCOL)
     return
+
+
+

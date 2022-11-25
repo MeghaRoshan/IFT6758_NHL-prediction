@@ -130,5 +130,6 @@ def getPreviousEvent (df):
     df['distance_from_last_event'] =  ((df["xCoord"] - df["last_eventxCoord"])**2 + (df["yCoord"] - df["last_eventyCoord"])**2)**0.5
     df['rebound'] = np.where(df['last_EventType']=='Shot', True, False)
     df['change_in_angle'] = np.where(df['last_EventType']=='Shot',np.where(df['yCoord'] *df['last_eventyCoord'] >0, ( df['Angle_from_net'] -df['last_Angle_from_net']),(df['Angle_from_net'] +df['last_Angle_from_net'])),0)
+    df['time_from_last_event'] = np.where(df['time_from_last_event'] ==0, 0.1, df['time_from_last_event'])
     df['speed'] =  df['distance_from_last_event'] / df['time_from_last_event']
     return df
