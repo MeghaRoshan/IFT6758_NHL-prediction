@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+ <title>IFT6758 Blog Team 12</title>
+ <link href="http://localhost:4000/atom.xml" rel="self"/>
+ <link href="http://localhost:4000/"/>
+ <updated>2022-11-25T23:24:56-05:00</updated>
+ <id>http://localhost:4000</id>
+ <author>
+   <name>Khadidja Harhsita and Megha</name>
+   <email>markdotto@gmail.com</email>
+ </author>
+
+ 
+ <entry>
+   <title>Milestone 2</title>
+   <link href="http://localhost:4000/2022/11/25/milestone-2/"/>
+   <updated>2022-11-25T00:00:00-05:00</updated>
+   <id>http://localhost:4000/2022/11/25/milestone-2</id>
+   <content type="html">&lt;h2 id=&quot;1---feature-engineering-i&quot;&gt;1 - Feature Engineering I&lt;/h2&gt;
+
+&lt;h3 id=&quot;a-histogram-of-shot-counts-goals-and-no-goals-separated-binned-by-distance&quot;&gt;a) Histogram of shot counts (goals and no-goals separated), binned by distance&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;assets/1.png&quot; alt=&quot;2-111111111&quot; /&gt;
+The histogram above shows shots vs goals distribution over the distance from the net. Each bar covers 10 meters, and the height indicates the number of shots/goals in each distance range. We can see that the largest shots/goals were in the 5-15 meters range. There’s also a smaller hill whose peak for shots at 35-45 meter range.&lt;/p&gt;
+&lt;h3 id=&quot;b-histogram-of-shot-counts-goals-and-no-goals-separated-binned-by-angle&quot;&gt;b) Histogram of shot counts (goals and no-goals separated), binned by angle&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;assets/2.png&quot; alt=&quot;2-1111111211&quot; /&gt;
+This time, the histogram shows shots vs goals distribution over the angle from the net. Each bar covers 10 degress, and the height indicates the number of shots/goals in each distance range. We can see that the largest shots were in the 25-35 degress range. and the largest goals at 5-15 degrees.&lt;/p&gt;
+&lt;h3 id=&quot;c-histogram-where-one-axis-is-the-distance-and-the-other-is-the-angle&quot;&gt;c) Histogram where one axis is the distance and the other is the angle&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;assets/3.png&quot; alt=&quot;2-1111113111&quot; /&gt;
+&lt;img src=&quot;assets/4.png&quot; alt=&quot;2-1111111411&quot; /&gt;
+&lt;img src=&quot;assets/5.png&quot; alt=&quot;2-11111411411&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;A Jointplot comprises three plots. Out of the three, one plot displays a graph which shows how the angle from the net varies with the distance from the net&lt;/p&gt;
+
+&lt;p&gt;The above plot displays a scatterplot with two histograms at the margins of the graph. If we observe the scatterplot, there seems to be a negative relationship between the columns distance from the net and angle from the net.
+We can also observe that we have an important concentrations of goals with small values of distance and angles.
+Most values are concentrated around the left bottom side which means most shots and goals are shot from a near distance from the net.
+Outliers are the data points that lie far away from the rest of the data values, in the graph we can see outliers 2 clusters of outliers as well as in the histograms.&lt;/p&gt;
+
+&lt;h3 id=&quot;a-plot-of-goal-rate-vs-distance-of-shot-&quot;&gt;a) Plot of goal rate vs distance of shot :&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;assets/6.png&quot; alt=&quot;2-11111116411&quot; /&gt;
+From the plot above, we can notice that the goal ratio is about 20% when we are at a small distance (less than 10 meters) from the net. The goal ratio decreases when we start going far from the net. We can see that the smallest value is achieved when the distance is between 40 and 80 i.e. when we are far from the net. We can also notice that the goal ratio increases after the bin 80-90 i.e. when the shots are shot from the opposite rink side, we can consider these shots as outliers as they are events that occur rarely.&lt;/p&gt;
+&lt;h3 id=&quot;b-plot-of-angle-rate-vs-distance-of-shot-&quot;&gt;b) Plot of angle rate vs distance of shot :&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;assets/7.png&quot; alt=&quot;2-11111117411&quot; /&gt;
+From the plot above, we can observe that the goal ratio is about 15% when we are in front of the net (less than 0-20 degrees) . The goal ratio decreases as we move away from the center of y. Qe can say that the worst angle to shoot from it is 50-80 and the best angle to obtain a goal is 0-20. We can also notice that the goal ratio increases after the bin 80-90 i.e. when the shots are shot from above the net, we can consider these shots as outliers as they are events that occur rarely.&lt;/p&gt;
+&lt;h3 id=&quot;c-histogram-of-goals-binned-by-distance-with-separate-empty-net-and-non-empty-net-events-&quot;&gt;c) Histogram of goals, binned by distance, with separate empty net and non-empty net events :&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;assets/8.png&quot; alt=&quot;2-11111118411&quot; /&gt;
+Non Empty net :
+&lt;img src=&quot;assets/9.png&quot; alt=&quot;2-11119111411&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Empty net :
+&lt;img src=&quot;assets/10.png&quot; alt=&quot;2-111111111411&quot; /&gt;
+We can say that when the net is not empty, we have a better chance to goal when we shot from a distance between 7 and 15 and then our chances decreases. But when the net is empty, the chances increases for all kind of shots especially the ones in 10-20 meters&lt;/p&gt;
+
+&lt;h2 id=&quot;2---baseline-models&quot;&gt;2 - Baseline Models&lt;/h2&gt;
+
+&lt;p&gt;We use simple models like logistic regression to perform classification. We generated following
+models:&lt;/p&gt;
+&lt;h3 id=&quot;a-using-distance-as-feature&quot;&gt;a) Using distance as feature:&lt;/h3&gt;
+&lt;p&gt;We applied logistic regression with input feature as distance and output/label as is_goal.
+We got the accuracy of 91% precision score 0.91 and Fscore 0.95. This means it can predict 91
+out of 100 inputs correctly.
+&lt;img src=&quot;assets/har11.png&quot; alt=&quot;1-1&quot; /&gt;
+&lt;img src=&quot;assets/har12.png&quot; alt=&quot;1-2&quot; /&gt;
+&lt;img src=&quot;assets/har13.png&quot; alt=&quot;1-3&quot; /&gt;
+&lt;img src=&quot;assets/har14.png&quot; alt=&quot;1-4&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;b-using-angle-as-feature&quot;&gt;b) Using angle as feature:&lt;/h3&gt;
+&lt;p&gt;We applied logistic regression with input feature as angle and output/label as is_goal.
+We got the accuracy of 91% precision score 0.91 and Fscore 0.95. This means it can predict 91
+out of 100 inputs correctly.
+&lt;img src=&quot;assets/har21.png&quot; alt=&quot;2-1&quot; /&gt;
+&lt;img src=&quot;assets/har22.png&quot; alt=&quot;2-2&quot; /&gt;
+&lt;img src=&quot;assets/har23.png&quot; alt=&quot;2-3&quot; /&gt;
+&lt;img src=&quot;assets/har24.png&quot; alt=&quot;2-4&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;c-using-angle-and-distance-as-features&quot;&gt;c) Using angle and distance as features:&lt;/h3&gt;
+&lt;p&gt;We applied logistic regression with input feature as distance and output/label as is_goal.
+We got the accuracy of 91% precision score 0.91 and Fscore 0.95. This means it can predict 91
+out of 100 inputs correctly.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/har31.png&quot; alt=&quot;3-1&quot; /&gt;
+&lt;img src=&quot;assets/har32.png&quot; alt=&quot;3-2&quot; /&gt;
+&lt;img src=&quot;assets/har33.png&quot; alt=&quot;3-3&quot; /&gt;
+&lt;img src=&quot;assets/har34.png&quot; alt=&quot;3-4&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;We quickly come to the conclusion that the logistic regression model consistently predicts goals,
+regardless of the features used. It implies that a more sophisticated model must be taken into
+account for this binary classification, which will be investigated in Tasks 5 and 6. We even
+contrast the non-learning statistical method with the log-reg.&lt;/p&gt;
+&lt;h2 id=&quot;3---feature-engineering-ii&quot;&gt;3 - Feature Engineering II&lt;/h2&gt;
+&lt;p&gt;List of all of the features created for this section are :&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Y_net : the y  coordinates of the net of the opposing team&lt;/li&gt;
+  &lt;li&gt;X_net	: the x  coordinates of the net of the opposing team&lt;/li&gt;
+  &lt;li&gt;last_EventType : the previous event type before a shot or goal was made.&lt;/li&gt;
+  &lt;li&gt;last_period : the period when the previous event occurred&lt;/li&gt;
+  &lt;li&gt;last_periodTime : the time when the previous event occurred&lt;/li&gt;
+  &lt;li&gt;last_eventxCoord : the x coordinate of the previous event&lt;/li&gt;
+  &lt;li&gt;last_eventyCoord : the y coordinate of the previous event&lt;/li&gt;
+  &lt;li&gt;last_shotType : the type of the previous event&lt;/li&gt;
+  &lt;li&gt;last_periodSeconds : the time in seconds of the previous event&lt;/li&gt;
+  &lt;li&gt;last_Distance_from_net : the distance from the net of the opposing team of the previous event&lt;/li&gt;
+  &lt;li&gt;last_Angle_from_net : the angle from the net of the opposing team of the previous event&lt;/li&gt;
+  &lt;li&gt;time_from_last_event : the time between the current shot/ goal and the the event that occurred before&lt;/li&gt;
+  &lt;li&gt;distance_from_last_event : the distance between the current goal/shot and the previous shot/event&lt;/li&gt;
+  &lt;li&gt;rebound : a flag that indicates if the previous event is a shot or not&lt;/li&gt;
+  &lt;li&gt;change_in_angle : the angle beween the previous event and the current shot/goal.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;speed : the speed of the events ( the distance from the previous event, divided by the time since the previous event.)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Link to the experiment which stores the filtered DataFrame artifact for the specified game :
+https://www.comet.com/yasmine/ift6758-a22-milestone-2/b6742c589a64401d843cb0766cbce801?assetId=0b219e7f221d4e7ca6bff8537d0834a2&amp;amp;assetPath=dataframes&amp;amp;experiment-tab=assets
+    &lt;h2 id=&quot;4---advanced-models&quot;&gt;4 - Advanced Models&lt;/h2&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;a-question-1-&quot;&gt;a) Question 1 :&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;assets/megha1.png&quot; alt=&quot;6-6&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The baseline xgboost model is trained on the “Distance” and “Angle” features obtained post implementing feature engineering 1. The model is trained with a learning rate of 0.1, a maximum depth of 7 and the number of estimators are taken as 5000. The subsampling is set as 0.5 . The trained accuracy obtained through such a model is 0.7255 while the validation accuracy is 0.7144
+ The validation set is 20% and the training set is 80% of the actual training set provided. The accuracy / prediction is much better using the xgboost as compared to the logistics regression baseline model.
+&lt;img src=&quot;assets/megha11.png&quot; alt=&quot;4-1&quot; /&gt;
+&lt;img src=&quot;assets/megha13.png&quot; alt=&quot;4-2&quot; /&gt;
+&lt;img src=&quot;assets/megha14.png&quot; alt=&quot;4-3&quot; /&gt;
+&lt;img src=&quot;assets/megha15.png&quot; alt=&quot;4-4&quot; /&gt;
+&lt;img src=&quot;assets/megha16.png&quot; alt=&quot;4-5&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;b-question-2-&quot;&gt;b) Question 2 :&lt;/h3&gt;
+&lt;p&gt;Post preprocessing the data to remove null values in the entire dataset and infinite values in the speed column, we tune the hyperparameters with the following parameters using Grid SearchCV.
+learning_rate_list=[0.02,0.05,0.1]
+max_depth_list =[5,7,10]
+n_estimators_list = [2000, 3000,5000]&lt;/p&gt;
+
+&lt;p&gt;Below is the table obtained to get compare and rank the combination of characters that provide the highest accuracy.
+&lt;img src=&quot;assets/megha2.png&quot; alt=&quot;6-2&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;We further plot curves to infer the parameter that provide the highest accuracy.
+The graphs are shown below:
+&lt;img src=&quot;assets/megha21.png&quot; alt=&quot;4-21&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;From the above figure, we can conclude that validation accuracy decreases as we increase the number of estimators and the depth of the tree for our data.
+&lt;img src=&quot;assets/megha22.png&quot; alt=&quot;4-22&quot; /&gt;
+We can conclude from the above figure that the validation accuracy decreases as we increase the learning rate.
+The new tuned model is obtained by using the following parameters:
+learning_rate=0.02,
+max_depth=6,
+n_estimators=2000,
+subsample=1,colsample_bytree=1
+The accuracy thus obtainedare :
+AUC Train: 0.7268
+AUC Valid: 0.6767
+The new tuned model is trained on the data obtained from feature engineering 2 and thus have different features as from the baseline model. The accuracy is almost equal to or lower than the XGBoost baseline model.
+&lt;img src=&quot;assets/megha23.png&quot; alt=&quot;4-23&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;train and validation AUC increases as no of trees increases
+&lt;img src=&quot;assets/megha24.png&quot; alt=&quot;4-24&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The confusion matrix for the results of the tuned model.
+Below is the Classification report of the tuned model:
+&lt;img src=&quot;assets/megha25.png&quot; alt=&quot;4-25&quot; /&gt;
+&lt;img src=&quot;assets/megha26.png&quot; alt=&quot;4-26&quot; /&gt;
+&lt;img src=&quot;assets/megha27.png&quot; alt=&quot;4-27&quot; /&gt;
+&lt;img src=&quot;assets/megha28.png&quot; alt=&quot;4-28&quot; /&gt;
+&lt;img src=&quot;assets/megha210.png&quot; alt=&quot;4-210&quot; /&gt;&lt;/p&gt;
+&lt;h3 id=&quot;c-question-3-&quot;&gt;c) Question 3 :&lt;/h3&gt;
+&lt;p&gt;The importance of features is given by the below table:
+&lt;img src=&quot;assets/megha31.png&quot; alt=&quot;4-31&quot; /&gt;
+SHAP is used to keep a track of  the contribution of features in increasing or decreasing the performance of the model Here are some of the figures obtained through SHAP.
+&lt;img src=&quot;assets/megha32.png&quot; alt=&quot;4-32&quot; /&gt;
+&lt;img src=&quot;assets/megha33.png&quot; alt=&quot;4-33&quot; /&gt;
+&lt;img src=&quot;assets/megha34.png&quot; alt=&quot;4-34&quot; /&gt;
+&lt;img src=&quot;assets/megha35.png&quot; alt=&quot;4-35&quot; /&gt;
+&lt;img src=&quot;assets/megha36.png&quot; alt=&quot;4-36&quot; /&gt;
+&lt;img src=&quot;assets/megha37.png&quot; alt=&quot;4-37&quot; /&gt;
+Features pushing the prediction higher are shown in red, those pushing the prediction lower are in blue.
+The selected features from the above figures(‘time_from_last_event’,,’speed’,’last_Angle_from_net’,’last_period’,’last_Distance_from_net’
+) were fed to the XGBoost model and the validation accuracy thus obtained is validation_0-auc:0.63307
+The model did not perform better than the XGBoost baseline and the XGboost tuned model with the full set of features. We can hence conclude that decreasing the features in the provided dataset did not increase the accuracy. And training the model on Distance and Angle performed better and gave the best results among Logistic Regression models and the XGBoost models.&lt;/p&gt;
+
+&lt;h2 id=&quot;5---give-it-your-best-shot&quot;&gt;5 - Give it your best shot!&lt;/h2&gt;
+&lt;p&gt;In this part, we choose to work with Neural networks. below the methods used :&lt;/p&gt;
+&lt;h3 id=&quot;a-eda-exploratory-data-analysis-&quot;&gt;a) EDA (Exploratory Data Analysis) :&lt;/h3&gt;
+&lt;p&gt;We started by analyzing the missing values :
+&lt;img src=&quot;assets/kh51.png&quot; alt=&quot;5-51&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;More than 80% of the values are missing for some features, so we decided to drop these features.&lt;/p&gt;
+
+&lt;p&gt;In the figure below, we can see the correlation map between our features :
+&lt;img src=&quot;assets/kh52.png&quot; alt=&quot;5-52&quot; /&gt;
+There are no high correlation between our features, we can keep all of them for now.&lt;/p&gt;
+
+&lt;p&gt;We can do more feature engineering in this par.&lt;/p&gt;
+&lt;h3 id=&quot;b-feature-engineering-&quot;&gt;b) Feature engineering :&lt;/h3&gt;
+&lt;h4 id=&quot;1-data-encoding-&quot;&gt;1) Data encoding :&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;the periodType contains 3 values : OVERTIME, REGULAR and SHOOTOUT, we decided to use a OneHotEncoder.
+&lt;img src=&quot;assets/kh53.png&quot; alt=&quot;5-53&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;The second categorical feature is teamOfShooter, for this feature, we decided to use : LeaveOneOutEncoder because we have a nominal feature, with lot of teams and also to avoid overfitting
+&lt;img src=&quot;assets/kh54.png&quot; alt=&quot;5-54&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;We have different shot type :
+&lt;img src=&quot;assets/kh50.png&quot; alt=&quot;5-50&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;For our last categorical feature : shotType, we decided to use an OrdinalEncoder becasue the order matter here, as we saw in the previous milestone
+&lt;img src=&quot;assets/kh55.png&quot; alt=&quot;5-55&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;2-feature-selection-&quot;&gt;2) Feature selection :&lt;/h4&gt;
+&lt;p&gt;In this part, we used ExtraTreesClassifier as a feature selection method.
+The feature selection is used to make the process more accurate. It also increases the prediction power of the models by selecting the most critical variables and eliminating the redundant and irrelevant ones.
+&lt;img src=&quot;assets/kh56.png&quot; alt=&quot;5-56&quot; /&gt;&lt;/p&gt;
+&lt;h4 id=&quot;3-data-standardization-&quot;&gt;3) Data standardization :&lt;/h4&gt;
+&lt;p&gt;The goal of using data standardization is to bring down all the features to a common scale
+without distorting the differences in the range of the values.
+It will help training of our neural networks as the different features are on a similar scale and help it to converge faster.&lt;/p&gt;
+&lt;h4 id=&quot;4-imbalanced-data-&quot;&gt;4) Imbalanced data :&lt;/h4&gt;
+&lt;p&gt;From the plot below, we can see that our data is imbalanced. Thus, our model will always get high accuracy since if it predicts all the rows as class 0. To deal with this, we decided to use SMOTE method&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;SMOTE works by selecting examples that are close in the feature space, drawing a line between the examples in the feature space and drawing a new sample at a point along that line.
+&lt;img src=&quot;assets/kh57.png&quot; alt=&quot;5-57&quot; /&gt;
+    &lt;h3 id=&quot;b-model-training-&quot;&gt;b) Model training :&lt;/h3&gt;
+    &lt;p&gt;Below the metrics we choose to evaluate the model:&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;METRICS&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;keras&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;metrics&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TruePositives&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;tp&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;keras&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;metrics&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;FalsePositives&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;fp&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;keras&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;metrics&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TrueNegatives&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;tn&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;keras&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;metrics&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;FalseNegatives&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;fn&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;keras&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;metrics&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BinaryAccuracy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;accuracy&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;keras&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;metrics&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Precision&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;precision&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;keras&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;metrics&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Recall&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;recall&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;keras&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;metrics&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;AUC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;auc&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;keras&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;metrics&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;AUC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;prc&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;curve&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;PR&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# precision-recall curve
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;We used the Sequential API to build the model&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# build a model
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Sequential&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Dense&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;input_shape&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;activation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;relu&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# Add an input shape! (features,)
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Dense&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;activation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;relu&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Dense&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;activation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;sigmoid&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;summary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# compile the model
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;compile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;optimizer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;Adam&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+              &lt;span class=&quot;n&quot;&gt;loss&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;binary_crossentropy&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+              &lt;span class=&quot;n&quot;&gt;metrics&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;METRICS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# early stopping callback
+# This callback will stop the training when there is no improvement in
+# the validation loss for 10 consecutive epochs.
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;es&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;EarlyStopping&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;monitor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;val_accuracy&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                                   &lt;span class=&quot;n&quot;&gt;mode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;max&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# don&apos;t minimize the accuracy!
+&lt;/span&gt;                                   &lt;span class=&quot;n&quot;&gt;patience&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                                   &lt;span class=&quot;n&quot;&gt;restore_best_weights&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# now we just update our model fit call
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;history&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;callbacks&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;es&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;epochs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;batch_size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;validation_split&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;shuffle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;verbose&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;We also used an early stopping callback that will stop the training when there is no improvement in the validation loss for 10 consecutive epochs.
+&lt;img src=&quot;assets/kh58.png&quot; alt=&quot;5-58&quot; /&gt;&lt;/p&gt;
+&lt;h3 id=&quot;b-results-&quot;&gt;b) Results :&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;assets/kh61.png&quot; alt=&quot;5-61&quot; /&gt;
+&lt;img src=&quot;assets/kh62.png&quot; alt=&quot;5-62&quot; /&gt;
+&lt;img src=&quot;assets/kh63.png&quot; alt=&quot;5-63&quot; /&gt;
+&lt;img src=&quot;assets/kh64.png&quot; alt=&quot;5-64&quot; /&gt;
+&lt;img src=&quot;assets/kh65.png&quot; alt=&quot;5-65&quot; /&gt;
+&lt;img src=&quot;assets/kh66.png&quot; alt=&quot;5-66&quot; /&gt;
+&lt;img src=&quot;assets/kh67.png&quot; alt=&quot;5-67&quot; /&gt;
+&lt;img src=&quot;assets/kh68.png&quot; alt=&quot;5-68&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The neural network model given below was built on a 80% random sample of the shots and
+goasl, and validated on the 20% held out. The model did not over fit the training dataset and was deemed appropriate.
+Saving to comet-ml :&lt;/p&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# Create an experiment with your api key
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;comet_exp6&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Experiment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;api_key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;LgN3RhQfuVAcQnKyC9X0Gk1PC&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;project_name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ift6758-a22-milestone-2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;workspace&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;yasmine&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;log_code&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# save the model to disk
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;filename&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&apos;../models/TryBestShot_bestmodel.sav&apos;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;pickle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dump&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;filename&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&apos;wb&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;comet_exp6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;log_model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Try best shot6&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&apos;../models/TryBestShot_bestmodel.sav&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;comet_exp6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;log_metric&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;accuracy&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;accuracy_score&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;preds&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#these will all get logged
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;batch_size&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;&apos;epochs&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;27&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;&apos;layer_num&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;&apos;optimizer&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;adam&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;&apos;patience&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;comet_exp6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;log_parameters&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;comet_exp6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;log_dataframe_profile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;df_smote&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# keep this name
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dataframe_format&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;csv&apos;&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# ensure you set this flag!
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;links to experiments :&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;https://www.comet.com/yasmine/ift6758-a22-milestone-2/355986f89fc74eb0b54d19099ae3c242?experiment-tab=chart&amp;amp;showOutliers=true&amp;amp;smoothing=0&amp;amp;transformY=smoothing&amp;amp;xAxis=wall&lt;/li&gt;
+  &lt;li&gt;https://www.comet.com/yasmine/ift6758-a22-milestone-2/21355c4d9aae4381adefa20db7738efe?experiment-tab=chart&amp;amp;showOutliers=true&amp;amp;smoothing=0&amp;amp;transformY=smoothing&amp;amp;xAxis=wall&lt;/li&gt;
+  &lt;li&gt;https://www.comet.com/yasmine/ift6758-a22-milestone-2/62e5259bcbe3444780c8f3ed8edb8577?experiment-tab=chart&amp;amp;showOutliers=true&amp;amp;smoothing=0&amp;amp;transformY=smoothing&amp;amp;xAxis=wall&lt;/li&gt;
+  &lt;li&gt;https://www.comet.com/yasmine/ift6758-a22-milestone-2/26f5adae91814c9795c79958404f710d?experiment-tab=chart&amp;amp;showOutliers=true&amp;amp;smoothing=0&amp;amp;transformY=smoothing&amp;amp;xAxis=wall&lt;/li&gt;
+  &lt;li&gt;https://www.comet.com/yasmine/ift6758-a22-milestone-2/5b6ecf5ce6c048a5b66d3e26d668198d?experiment-tab=chart&amp;amp;showOutliers=true&amp;amp;smoothing=0&amp;amp;transformY=smoothing&amp;amp;xAxis=wall&lt;/li&gt;
+  &lt;li&gt;https://www.comet.com/yasmine/ift6758-a22-milestone-2/76ff849af73a4310969ff68800e882d4?experiment-tab=chart&amp;amp;showOutliers=true&amp;amp;smoothing=0&amp;amp;transformY=smoothing&amp;amp;xAxis=wall&lt;/li&gt;
+  &lt;li&gt;https://www.comet.com/yasmine/ift6758-a22-milestone-2/650ae41436dd4ce5935da01d49d7e80d?experiment-tab=chart&amp;amp;showOutliers=true&amp;amp;smoothing=0&amp;amp;transformY=smoothing&amp;amp;xAxis=wall
+    &lt;h2 id=&quot;6---evaluate-on-test-set-&quot;&gt;6 - Evaluate on test set :&lt;/h2&gt;
+    &lt;p&gt;Baseline models :&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/x22.png&quot; alt=&quot;5-22224&quot; /&gt;
+&lt;img src=&quot;assets/x23.png&quot; alt=&quot;5-62222&quot; /&gt;
+&lt;img src=&quot;assets/x24.png&quot; alt=&quot;5-6223&quot; /&gt;
+&lt;img src=&quot;assets/x25.png&quot; alt=&quot;5-6224&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Xgboost model :
+&lt;img src=&quot;assets/x1.png&quot; alt=&quot;5-22e224&quot; /&gt;
+&lt;img src=&quot;assets/x2.png&quot; alt=&quot;5-62e222&quot; /&gt;
+&lt;img src=&quot;assets/x3.png&quot; alt=&quot;5e-62e23&quot; /&gt;
+&lt;img src=&quot;assets/x4.png&quot; alt=&quot;5e-6224&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Neural network , regular season :
+&lt;img src=&quot;assets/reg1.png&quot; alt=&quot;5-2222444&quot; /&gt;
+&lt;img src=&quot;assets/reg2.png&quot; alt=&quot;5-6222442&quot; /&gt;
+&lt;img src=&quot;assets/reg3.png&quot; alt=&quot;5-622443&quot; /&gt;
+&lt;img src=&quot;assets/reg4.png&quot; alt=&quot;5-624424&quot; /&gt;
+&lt;img src=&quot;assets/reg5.png&quot; alt=&quot;5-624424&quot; /&gt;
+Neural network , playoffs season :
+&lt;img src=&quot;assets/off1.png&quot; alt=&quot;5-2222444&quot; /&gt;
+&lt;img src=&quot;assets/off2.png&quot; alt=&quot;5-6222442&quot; /&gt;
+&lt;img src=&quot;assets/off3.png&quot; alt=&quot;5-622443&quot; /&gt;
+&lt;img src=&quot;assets/off4.png&quot; alt=&quot;5-624424&quot; /&gt;
+&lt;img src=&quot;assets/off5.png&quot; alt=&quot;5-624424&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;First, with an accuracy of 91% and a bias in goal prediction, logistic regression is not performing any better on the testing data than it did last year. The accuracy score for XGBoost is 71. Neural networks remain the top model. &lt;/li&gt;
+  &lt;li&gt;We noticed that the neural network continues to perform better when tested with the playoff data for the 2019-2020 season. Even though XGBoost (the inferior contender in this testing data) has a greater accuracy of 71% compared to 91% for logistic regression, the latter is still consistently predicting “GOAL”&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
+ 
+
+</feed>
