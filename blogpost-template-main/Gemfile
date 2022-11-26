@@ -10,4 +10,5 @@ gem "jekyll-sitemap"
 gem "jekyll-seo-tag" 
 gem "jekyll-paginate"
 gem "webrick", "~> 1.7"
+gem 'wdm', '>= 0.1.0'
 
