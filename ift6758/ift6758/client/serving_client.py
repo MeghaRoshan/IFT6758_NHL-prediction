@@ -28,12 +28,14 @@ class ServingClient:
             X (Dataframe): Input dataframe to submit to the prediction service.
         """
 
-        raise NotImplementedError("TODO: implement this function")
+        r = requests.post(f"{self.base_url}/predict", json = json.loads(X.to_json()))
+        return pd.DataFrame(json.loads(r.json()))
 
     def logs(self) -> dict:
         """Get server logs"""
-
-        raise NotImplementedError("TODO: implement this function")
+        r = requests.get(f"{self.base_url}/logs")
+        logs = r.json()
+        return logs
 
     def download_registry_model(self, workspace: str, model: str, version: str) -> dict:
         """
@@ -51,4 +53,16 @@ class ServingClient:
             version (str): The model version to download
         """
 
-        raise NotImplementedError("TODO: implement this function")
+        req = {
+            'workspace': workspace,
+            'model': model,
+            'version': version,
+        }
+
+        r = requests.post(
+        	f"{self.base_url}/download_registry_model", 
+        	json=json.loads(json.dumps(req, indent = 4))
+        )
+        
+        logs = r.json()
+        return logs
