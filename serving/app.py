@@ -86,7 +86,9 @@ def download_registry_model():
     workspace = json["workspace"]
     version = json["version"]
     api = API(api_key="LgN3RhQfuVAcQnKyC9X0Gk1PC")
-    file_model_path = f"../models/{model_swap}.pkl"
+    model_details = api.get_registry_model_details(workspace, model_swap, version)
+    filename = model_details['assets'][0]['fileName']
+    file_model_path = f"../models/{filename}"
 
     if os.path.isfile(file_model_path):
         model = model_swap
@@ -94,7 +96,7 @@ def download_registry_model():
         model_already_exists = True
 
     else:
-        model = model_swap
+        model = model_swap        
         app.logger.info(f"Downloading from COMET {model}")
         api.download_registry_model(workspace, model,version ,
                             output_path="../models", expand=True)
