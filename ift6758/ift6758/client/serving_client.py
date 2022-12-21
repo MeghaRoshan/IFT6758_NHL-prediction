@@ -60,8 +60,7 @@ class ServingClient:
         }
 
         r = requests.post(
-        	f"{self.base_url}/download_registry_model", 
-        	json=json.loads(json.dumps(req, indent = 4))
+        	f"{self.base_url}/download_registry_model", json=json.loads(json.dumps(req, indent = 4))
         )
         
         logs = r.json()
