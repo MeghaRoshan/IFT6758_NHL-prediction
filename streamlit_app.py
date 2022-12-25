@@ -22,9 +22,9 @@ st.title("Hockey Visualization App")
 
 with st.sidebar:
     # TODO: Add input for the sidebar
-    workspace = st.text_input('Workspace', 'Workspace x') #yasmine
-    model = st.text_input('Model', 'Model y') #"model-xgboost-final2"
-    version = st.text_input('Version', 'Version z')#"1.0.0"
+    workspace = st.text_input('Workspace', 'yasmine') #yasmine
+    model = st.text_input('Model', 'model-xgboost-final2') #"model-xgboost-final2"
+    version = st.text_input('Version', '1.0.0')#"1.0.0"
     if st.button('Get Model'):
         print(workspace)
         print(model)
