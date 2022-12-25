@@ -7,7 +7,7 @@ from ift6758.ift6758.client.serving_client import ServingClient
 
 from comet_ml import API
 
-api_key=BDQ0IvlidYZwCjQubkQCX7cs0
+api_key='BDQ0IvlidYZwCjQubkQCX7cs0'
 api = API(api_key)
 
 gc = GameClient()
