@@ -2,8 +2,8 @@ import json
 import requests
 import pandas as pd
 import logging
-from ift6758.ift6758.client.serving_client import ServingClient
-from ift6758.ift6758.data.loadGameData import PreprocessData
+from serving_client import ServingClient
+from loadGameData import PreprocessData
 
 logger = logging.getLogger(__name__)
 logger.info(f"Initializing ClientGame ")
