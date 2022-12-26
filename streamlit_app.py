@@ -5,11 +5,12 @@ import numpy as np
 from ift6758.ift6758.client.game_client import GameClient
 from ift6758.ift6758.client.serving_client import ServingClient
 import traceback
+import datetime
 
 
 from comet_ml import API
 
-api_key='BDQ0IvlidYZwCjQubkQCX7cs0'
+api_key='BDQ0IvlidYZwCjQubkQCX7cs0' 
 api = API(api_key)
 
 gc = GameClient()
@@ -107,7 +108,7 @@ def ping_game_id(game_id):
             if st.session_state.session_tracker > 0 and st.session_state.previous_session_tracker > 0 and st.session_state['game_id'] == game_id:
                 model_df = model_df.copy()
                 model_df = model_df.iloc[-st.session_state.session_tracker:]
-                new_model_df=model_df.drop(columns=['homeTeam','AwayTeam','Is_goal','teamOfShooter','periodTime'])
+                new_model_df=model_df.drop(columns=['homeTeam','AwayTeam','Is_goal','teamOfShooter','periodTime','timeLeft','period'])
                 #print(new_model_df)
                 st.session_state.session_tracker = new_dataframe_length
                 st.session_state.previous_session_tracker = new_dataframe_length
@@ -137,6 +138,7 @@ def ping_game_id(game_id):
                     grouped_goal_df = pd.DataFrame(grouped_goal_df).transpose()
                     last_event_df = pd.DataFrame(last_event_df).transpose()
                     last_event_df = last_event_df.reset_index()
+                   
                     # If the team did not acquire any goal then put zero goals for that team
                     if len(grouped_prob_df) < 2:
                         if str(model_df.homeTeam[0]) not in grouped_prob_df.columns:
@@ -148,14 +150,15 @@ def ping_game_id(game_id):
                             grouped_goal_df[model_df.homeTeam[0]] = 0
                         if str(model_df.AwayTeam[0]) not in grouped_goal_df.columns:
                             grouped_goal_df[model_df.AwayTeam[0]] = 0
-
+                    last_event_df.period= last_event_df.period[0].astype(str)
                     # Calculating the time left in period
                     #time_remain_df = str(pd.DataFrame(pd.to_datetime("20:00", format="%M:%S")
                                  #- pd.to_datetime(last_event_df["periodTime"], format="%M:%S"))['periodTime'][0])
-
+                    
                     st.subheader("Game " + str(game_id) + ": " + str(model_df.homeTeam[0]) + " vs " + str(model_df.AwayTeam[0]))
+                    st.text("Period " + last_event_df.period[0].astype(str)+ " - "+ str(datetime.timedelta(seconds=(last_event_df.timeLeft[0]))) + " left")
                     #st.text("Period " + str(last_event_df.period[0]) + " - "
-                         #   + str(":".join(time_remain_df.split("days")[-1].split(":")[1:])) + " left")
+                        #   + str(model_df.timeLeft + " left"))
                     
                     # Arranging the values in two columns
                     col1, col2 = st.columns(2)
