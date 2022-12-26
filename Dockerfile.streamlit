@@ -58,7 +58,7 @@ ENV COMET_API_KEY=$COMET_API_KEY
 
 # TODO: install libs
 RUN pip install -r requirements.txt
-RUN pip install xgboost==0.90
+RUN pip install xgboost==1.5.0
 COPY requirements.txt requirements.txt
 
 
