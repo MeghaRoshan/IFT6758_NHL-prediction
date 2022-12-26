@@ -14,7 +14,7 @@ api_key='BDQ0IvlidYZwCjQubkQCX7cs0'
 api = API(api_key)
 
 gc = GameClient()
-sc = ServingClient("127.0.0.1", port = 8890)
+sc = ServingClient("serving", port = 8890)
 """
 General template for your streamlit app. 
 Feel free to experiment with layout and adding functionality!
