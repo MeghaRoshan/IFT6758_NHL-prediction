@@ -104,7 +104,8 @@ def PreprocessData(gameId, idx) :
     Transformed_Values=imp_mean.transform(FinalDf)
     TransformedDf = pd.DataFrame(Transformed_Values, index=FinalDf.index, columns=FinalDf.columns)
     TransformedDf_=TransformedDf.drop("period",axis=1)
-    test_X = TransformedDf_.drop('Is_goal',axis=1)
+    test_X=TransformedDf_
+    #test_X = TransformedDf_.drop('Is_goal',axis=1)
     test_X =  test_X.reset_index().drop(columns ='index')
     ###aditinal information 
     df_add,idxx = getGameData (gameId,idx )
