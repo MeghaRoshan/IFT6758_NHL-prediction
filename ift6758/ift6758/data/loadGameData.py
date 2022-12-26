@@ -8,8 +8,8 @@ import datetime
 from sklearn import preprocessing
 from sklearn.impute import SimpleImputer
 import json
-from ift6758.data.Feature_Engineering1 import combineAllFeatures
-from ift6758.data.Feature_Engineering2 import getPreviousEvent
+from Feature_Engineering1 import combineAllFeatures
+from Feature_Engineering2 import getPreviousEvent
 import warnings
 warnings.filterwarnings('ignore')
 
