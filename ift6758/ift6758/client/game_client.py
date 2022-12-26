@@ -22,7 +22,7 @@ class GameClient:
         self.model_df_length = self.game.shape[0]
     def pingGame (self,gameId ,idx= 0):
         df, last_idx = PreprocessData(gameId, idx)
-        x_test = df[['Is_goal','periodSeconds',	'last_period',	'last_eventxCoord',	'last_eventyCoord',	'last_periodSeconds', 'last_Distance_from_net',	'last_Angle_from_net',	'time_from_last_event',	'distance_from_last_event',	'rebound',	'change_in_angle',	'speed','homeTeam','AwayTeam','teamOfShooter','periodTime']]
+        x_test = df[['Is_goal','periodSeconds',	'last_period',	'last_eventxCoord',	'last_eventyCoord',	'last_periodSeconds', 'last_Distance_from_net',	'last_Angle_from_net',	'time_from_last_event',	'distance_from_last_event',	'rebound',	'change_in_angle',	'speed','homeTeam','AwayTeam','teamOfShooter','periodTime','timeLeft','period']]
         #predictions = s.predict(x_test).reset_index().drop(columns ='index')
         df_add = df[['gameID','period','periodTime','teamOfShooter', 'homeTeam','AwayTeam','timeLeft','eventType']].reset_index().drop(columns ='index')
         #result =pd.concat([df_add,predictions],axis=1)
