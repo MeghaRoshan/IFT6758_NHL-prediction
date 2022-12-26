@@ -29,6 +29,8 @@ class ServingClient:
         """
 
         r = requests.post(f"{self.base_url}/predict", json = json.loads(X.to_json()))
+        print(r.json())
+        print(type(r.json()))
         return pd.DataFrame(json.loads(r.json()))
 
     def logs(self) -> dict:
@@ -63,5 +65,5 @@ class ServingClient:
         	f"{self.base_url}/download_registry_model", json=json.loads(json.dumps(req, indent = 4))
         )
         
-        logs = r.json()
-        return logs
+        print("successfully downloaded model")
+        
