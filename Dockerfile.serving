@@ -47,7 +47,7 @@ WORKDIR /code
 # TODO: add code, optionally a default model if you want 
 
 ADD requirements.txt .
-ADD /serving/app.py .
+ADD /app.py .
 
 ENV COMET_API_KEY=$COMET_API_KEY
 
@@ -60,9 +60,10 @@ COPY requirements.txt requirements.txt
 
 # TODO: expose ports (or do this in docker-compose)
 
-EXPOSE 5000
+EXPOSE 8890
 
 # TODO: specify default command - this is not required because you can always specify the command
 # either with the docker run command or in the docker-compose file
 
-CMD ["gunicorn"  , "--bind", "0.0.0.0:5000", "app:app"]
+CMD ["gunicorn"  , "--bind", "0.0.0.0:8890", "app:app"]
+
